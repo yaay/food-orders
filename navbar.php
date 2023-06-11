@@ -42,6 +42,8 @@ $admin_username = $_SESSION["admin_username"];
         </li>
       </ul>
       <form class="d-flex">
+       <a href="logout.php" class="btn btn-danger" style=" text-decoration: none; font-weight: bold;  text-align: center; border: 3px solid black;">Logout</a>
+       &nbsp;&nbsp;
         <img src="./images/user.jpg" style="width: 50px; height:50px; border-radius:5px;">
         &nbsp;&nbsp;&nbsp;
         <h6 style="margin-top:15px;"><?php echo $admin_username ?></h6>

@@ -30,6 +30,8 @@ $username = $_SESSION["username"];
         </li>
       </ul>
       <form class="d-flex">
+      <a href="logout.php" class="btn btn-danger" style=" text-decoration: none; font-weight: bold;  text-align: center; border: 3px solid black;">Logout</a>
+      &nbsp;&nbsp;
         <img src="./images/social.jpg" style="width: 50px; height:50px; border-radius:5px;">&nbsp;&nbsp;&nbsp;
         <h6 style="margin-top:15px;"><?php echo $username ?></h6>
       </form>

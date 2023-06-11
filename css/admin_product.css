@@ -9,13 +9,13 @@ box-shadow: 1px 1px 10px silver;
 font-family: Arial, Helvetica, sans-serif;
 
 }
-input{
+ #nname ,#pprice{
 
     margin-bottom: 10px;
-    width: 60%;
+    width: 80%;
     padding: 5px;
 }
-button{
+.btnn{
     border: none;
     padding: 10px;
     width: 40%;
@@ -27,7 +27,7 @@ button{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold ;
 }
-label{
+.label{
     border: none;
     padding: 10px;
     width: 40%; 

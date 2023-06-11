@@ -44,7 +44,7 @@
         <div class="card h-100">
           <img src="./images/food.jpg" class="card-img-top" alt="...">
           <div class="card-body">
-          <center><a href="admin_product.php">Add Product</a></center>
+          <center><a href="admin_products.php">Add Product</a></center>
           </div>
         </div>
       </div>

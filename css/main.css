@@ -1,0 +1,20 @@
+.div-form {
+    padding: 15px;
+}
+
+.cafeteria {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 50px;
+}
+
+.myForm {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}

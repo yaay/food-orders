@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet"  href="css_bootstrap/bootstrap.min.css">
     <link rel="stylesheet"  href="css_bootstrap/bootstrap.css">
-   
 </head>
 <body>
 

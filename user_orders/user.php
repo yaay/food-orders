@@ -65,8 +65,8 @@ $products->execute();
 								<div class="card-title"><?= $product["name"] ?></div>
 								<div class="card-body">
 									<img src="uploaded_img/<?= $product["image"] ?>" width="100" alt="">
-									<div class="mt-2">
-										<button style="z-index:1212" data-id="<?= $product["ID"] ?>" data-name="<?= $product["name"] ?>" class="btn btn-primary btn-sm add-btn">add</button>
+									<div class="mt-2 text-center">
+										<button style="z-index:1212" data-id="<?= $product["ID"] ?>" data-name="<?= $product["name"] ?>" class="btn btn-primary btn-sm add-btn px-5 py-2">Add</button>
 									</div>
 								</div>
 
@@ -79,20 +79,11 @@ $products->execute();
 				<div style="border: 1px solid black; padding:10px; border-radius:7px;">
 
 					<form action="make_order.php" method="post">
-						<div id="orderd-products-injection-point">
-							<div class="row">
-								<div class="col-6">
-									<p class="mt-2">Tea <soan class="mx-2 item-count text-danger">2</span></p>
-								</div>
-								<div class="col-6">
-									<button type="button" class="btn btn-primary">+</button>
-									<button type="button" class="btn btn-warning">-</button>
+						<div class="text-center fw-bold mb-3">Order Summary</div>
 
-								</div>
-							</div>
-						</div>
-						<div>
-							<button class="btn btn-primary">Order</button>
+						<div id="orderd-products-injection-point"></div>
+						<div class="text-center mt-3">
+							<button class="btn btn-primary py-2 px-4">Order</button>
 						</div>
 					</form>
 

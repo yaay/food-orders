@@ -78,18 +78,21 @@ $products->execute();
 			<div class="col-6 col-md-3">
 				<div style="border: 1px solid black; padding:10px; border-radius:7px;">
 
-					<form action="/make_order" method="post">
+					<form action="make_order.php" method="post">
 						<div id="orderd-products-injection-point">
 							<div class="row">
 								<div class="col-6">
 									<p class="mt-2">Tea <soan class="mx-2 item-count text-danger">2</span></p>
 								</div>
 								<div class="col-6">
-									<button class="btn btn-primary">+</button>
-									<button class="btn btn-warning">-</button>
+									<button type="button" class="btn btn-primary">+</button>
+									<button type="button" class="btn btn-warning">-</button>
 
 								</div>
 							</div>
+						</div>
+						<div>
+							<button class="btn btn-primary">Order</button>
 						</div>
 					</form>
 
@@ -103,29 +106,52 @@ $products->execute();
 
 	<script>
 		const addBtns = document.querySelectorAll(".add-btn");
+		const orderProduct = document.getElementById("orderd-products-injection-point");
+
+
 		const orderProductHtml = (productId, productName) => {
 			return `
 						<div class="row" id="${productName}-${productId}">
 							<div class="col-6">
 								<p class="mt-2">${productName} <soan class="mx-2 item-count text-danger">1</span></p>
-								<input type="hidden" name="orderd[]" value="${productId}">
+								<input type="hidden" name="orders[${productId}]" value="1">
 								
 							</div>
 							<div class="col-6">
-								<button class="btn increament btn-primary">+</button>
-								<button class="btn decreament btn-warning">-</button>
+								<button type="button" class="btn increament btn-primary">+</button>
+								<button type="button" class="btn decreament btn-warning">-</button>
 							</div>
 						</div>
 			`;
 		}
 
+		orderProduct.addEventListener("click", event => {
+
+			if (event.target && event.target.matches(".increament")) {
+
+				let count = Number(event.target.parentElement.parentElement.querySelector(".item-count").innerHTML);
+
+				event.target.parentElement.parentElement.querySelector(".item-count").innerHTML = count + 1;
+				event.target.parentElement.parentElement.querySelector("input").value = count + 1;
+			}
+
+			if (event.target && event.target.matches(".decreament")) {
+
+				let count = Number(event.target.parentElement.parentElement.querySelector(".item-count").innerHTML);
+
+				if (count == 0) return;
+
+				event.target.parentElement.parentElement.querySelector(".item-count").innerHTML = count - 1;
+				event.target.parentElement.parentElement.querySelector("input").value = count - 1;
+			}
+
+		})
+
+
 		addBtns.forEach(btn => {
 			btn.addEventListener("click", event => {
 
-				const orderProduct = document.getElementById("orderd-products-injection-point");
-
 				orderProduct.insertAdjacentHTML("beforeend", orderProductHtml(event.target.dataset.id, event.target.dataset.name));
-
 			})
 		})
 	</script>

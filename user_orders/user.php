@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include './db_connection.php';
-include './connection_credentials.php';
+include '../db_connection.php';
+include '../connection_credentials.php';
 
 $username = $_SESSION["username"];
 
@@ -22,8 +22,8 @@ $products->execute();
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="css_bootstrap/bootstrap.min.css">
-	<link rel="stylesheet" href="css_bootstrap/bootstrap.css">
+	<link rel="stylesheet" href="../css_bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="../css_bootstrap/bootstrap.css">
 </head>
 
 <body>
@@ -77,19 +77,23 @@ $products->execute();
 			</div>
 			<div class="col-6 col-md-3">
 				<div style="border: 1px solid black; padding:10px; border-radius:7px;">
-					<div id="orderd-products-injection-point">
-						<div class="row">
-							<div class="col-6">
-								<p class="mt-2">Tea <soan class="mx-2 item-count text-danger">2</span></p>
 
-							</div>
-							<div class="col-6">
-								<button class="btn btn-primary">+</button>
-								<button class="btn btn-warning">-</button>
+					<form action="/make_order" method="post">
+						<div id="orderd-products-injection-point">
+							<div class="row">
+								<div class="col-6">
+									<p class="mt-2">Tea <soan class="mx-2 item-count text-danger">2</span></p>
+								</div>
+								<div class="col-6">
+									<button class="btn btn-primary">+</button>
+									<button class="btn btn-warning">-</button>
 
+								</div>
 							</div>
 						</div>
-					</div>
+					</form>
+
+
 				</div>
 			</div>
 		</div>
@@ -104,7 +108,8 @@ $products->execute();
 						<div class="row" id="${productName}-${productId}">
 							<div class="col-6">
 								<p class="mt-2">${productName} <soan class="mx-2 item-count text-danger">1</span></p>
-
+								<input type="hidden" name="orderd[]" value="${productId}">
+								
 							</div>
 							<div class="col-6">
 								<button class="btn increament btn-primary">+</button>
@@ -113,6 +118,7 @@ $products->execute();
 						</div>
 			`;
 		}
+
 		addBtns.forEach(btn => {
 			btn.addEventListener("click", event => {
 

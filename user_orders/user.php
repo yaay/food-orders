@@ -139,10 +139,13 @@ $products->execute();
 
 				let count = Number(event.target.parentElement.parentElement.querySelector(".item-count").innerHTML);
 
-				if (count == 0) return;
-
 				event.target.parentElement.parentElement.querySelector(".item-count").innerHTML = count - 1;
 				event.target.parentElement.parentElement.querySelector("input").value = count - 1;
+
+				if (count - 1 == 0) {
+					event.target.parentElement.parentElement.remove();
+				};
+
 			}
 
 		})
@@ -151,7 +154,9 @@ $products->execute();
 		addBtns.forEach(btn => {
 			btn.addEventListener("click", event => {
 
-				orderProduct.insertAdjacentHTML("beforeend", orderProductHtml(event.target.dataset.id, event.target.dataset.name));
+				if (!document.getElementById(event.target.dataset.name + "-" + event.target.dataset.id)) {
+					orderProduct.insertAdjacentHTML("beforeend", orderProductHtml(event.target.dataset.id, event.target.dataset.name));
+				}
 			})
 		})
 	</script>

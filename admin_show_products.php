@@ -30,6 +30,11 @@ $db = connect_to_database($db_user, $db_password, $db_name, $db_host, $db_port);
    <div class="box-container">
 
    <?php
+session_start(); 
+if (!isset($_SESSION['admin_username'])) {
+   header('Location:index.php');
+}
+
       $select_products = $db->prepare("SELECT * FROM `restaurant`.`products`");
       $select_products->execute();
       if($select_products->rowCount() > 0){

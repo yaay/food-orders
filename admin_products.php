@@ -1,8 +1,12 @@
 <?php 
-
 include "navbar.php";
 include './db_connection.php';
 include './connection_credentials.php';
+
+if (!isset($_SESSION['admin_username'])) {
+   header('Location:index.php');
+}
+
 $db = connect_to_database($db_user, $db_password, $db_name, $db_host, $db_port);
 // admin insert item product ////////////////////////////////////////////////////////
 if(isset($_POST['add_product'])){

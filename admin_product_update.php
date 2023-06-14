@@ -1,5 +1,10 @@
 <?php
 
+session_start(); 
+if (!isset($_SESSION['admin_username'])) {
+   header('Location:index.php');
+}
+
 
 include './db_connection.php';
 include './connection_credentials.php';

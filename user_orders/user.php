@@ -66,6 +66,7 @@ $products->execute();
 								<div class="card-body">
 									<img src="uploaded_img/<?= $product["image"] ?>" width="100" alt="">
 									<div class="mt-2 text-center">
+										<p>Price: <?= $product["price"] ?></p> 
 										<button style="z-index:1212" data-id="<?= $product["ID"] ?>" data-name="<?= $product["name"] ?>" class="btn btn-primary btn-sm add-btn px-5 py-2">Add</button>
 									</div>
 								</div>

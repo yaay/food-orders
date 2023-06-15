@@ -35,10 +35,10 @@ $admin_username = $_SESSION["admin_username"];
           <a class="nav-link" href="./data_table.php">Users</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Manual Order</a>
+          <a class="nav-link" href="./user_orders/user.php">Manual Order</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Checks</a>
+          <a class="nav-link" href="./checks.php">Checks</a>
         </li>
       </ul>
       <form class="d-flex">

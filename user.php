@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include '../db_connection.php';
-include '../connection_credentials.php';
+include './db_connection.php';
+include './connection_credentials.php';
 
 $username = $_SESSION["username"];
 
@@ -22,8 +22,8 @@ $products->execute();
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="../css_bootstrap/bootstrap.min.css">
-	<link rel="stylesheet" href="../css_bootstrap/bootstrap.css">
+	<link rel="stylesheet" href="./css_bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="./css_bootstrap/bootstrap.css">
 </head>
 
 <body>
@@ -37,10 +37,7 @@ $products->execute();
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Products</a>
+						<a class="nav-link active" aria-current="page" href="user.php">Home</a>
 					</li>
 				</ul>
 				<form class="d-flex">

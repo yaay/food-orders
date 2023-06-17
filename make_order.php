@@ -3,8 +3,8 @@
 
 session_start();
 
-include '../db_connection.php';
-include '../connection_credentials.php';
+include './db_connection.php';
+include './connection_credentials.php';
 
 $username = $_SESSION["username"];
 

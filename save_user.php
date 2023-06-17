@@ -7,6 +7,7 @@ $password = $_POST['password'];
 $conPass = $_POST['conPass'];
 $room_no = $_POST['room'];
 $ext = $_POST['ext'];
+
 $file_info= $_FILES['file'];
 $file_name = $file_info['name'];
 $tmp_name = $file_info['tmp_name'];
@@ -40,7 +41,7 @@ if(isset($_POST['submit'])) {
         $url = "Location:create_user.php?errors={$stringErrors}";
         header($url);
     } else {
-    $new_user = insert($name, $email, $password, $room_no, $ext, "<img src='$file_name' width='100px' height='100px' style='border-radius:7px'>");
+    $new_user = insert($name, $email, password_hash($password, PASSWORD_DEFAULT), $room_no, $ext, "<img src='$file_name' width='100px' height='100px' style='border-radius:7px'>");
 header('Location:./data_table.php');
     } 
     }

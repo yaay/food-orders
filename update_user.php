@@ -22,7 +22,7 @@ if(isset($_POST['update'])) {
     if ($password !== $conPass) {
     header("Location:./edit_user.php?id={$user["ID"]}");
     } else {
-    $res = update($id, $name, $email, $password, $room, $ext, "<img src='$file_name' width='100px' height='100px' style='border-radius:7px'>");
+    $res = update($id, $name, $email, password_hash($password, PASSWORD_DEFAULT), $room, $ext, "<img src='$file_name' width='100px' height='100px' style='border-radius:7px'>");
     header("Location:./data_table.php");
 }
 }

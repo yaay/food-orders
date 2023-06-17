@@ -19,7 +19,7 @@ $rows = select();
     <a href="./create_user.php" style="float: right;" class="btn btn-outline-success">Add New User</a>
     <br>
     <br>
-    <table class="table  my-3 table-striped table-hover table-bordered" style="text-align: center;">
+    <table class="table my-3 table-striped table-hover" style="text-align: center;">
         <tr>
         <th>ID</th>
         <th>Name</th>

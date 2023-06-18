@@ -24,11 +24,11 @@ $rows = select();
         <th>ID</th>
         <th>Name</th>
         <th>Email</th>
-        <th>Password</th>
+        <!-- <th>Password</th> -->
         <th>Room No.</th>
         <th>Ext</th>
         <th>Profile Picture</th>
-        <th>Is Admin</th>
+        <!-- <th>Is Admin</th> -->
         <th>Edit</th>
         <th>Delete</th>
 </tr>

@@ -51,7 +51,7 @@ if(!preg_match('/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])/', $password)
     // echo "<pre>";
     // var_dump($admin);
     // echo "</pre>";
-    if (($admin)) {
+    if (($admin) && password_verify($password, $admin['password'])) {
       if ($admin['isAdmin']) {
         $_SESSION["admin_username"] = $_POST['username'];
         header('Location:admin.php');

@@ -3,8 +3,8 @@
 
 session_start();
 
-include '../db_connection.php';
-include '../connection_credentials.php';
+include './db_connection.php';
+include './connection_credentials.php';
 
 $username = $_SESSION["username"];
 
@@ -21,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$id, $qty]);
         }
 
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        header('Location: order_details.php');
+        exit();
     } catch (PDOException $e) {
         echo $e->getMessage();
     }

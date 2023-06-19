@@ -11,12 +11,11 @@
 
 
     <?php
-session_start(); 
 include_once('./navbar.php');
 
 if (!isset($_SESSION['admin_username'])) {
     header('Location:index.php');
-  }
+}
 
 $name = '';
 $email_error = '';

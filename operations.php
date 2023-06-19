@@ -10,7 +10,7 @@ function select() {
     global $db;
 
     try {
-        $select_query = "select * from `restaurant`.`users`;";
+        $select_query = "select `ID`,`name`, `email`, `room_no`, `ext`, `profile_picture` from `restaurant`.`users`;";
         $select_stmt = $db->prepare($select_query);
         $res = $select_stmt->execute();
         $row_count = $select_stmt->rowCount();

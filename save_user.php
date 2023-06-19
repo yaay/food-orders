@@ -14,12 +14,17 @@ $tmp_name = $file_info['tmp_name'];
 
 
 $errors = [];
+$old_data = [];
 if (isset($name) && empty($name)) {
     $errors['name'] = "Name is required";
+} else {
+    $old_data['name'] = $name;
 }
 
 if (isset($email) && empty($email)) {
     $errors['email'] = "Email is required";
+}else {
+    $old_data['email'] = $email;
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -39,6 +44,10 @@ if(isset($_POST['submit'])) {
     if (count($errors)) {
         $stringErrors = json_encode($errors);
         $url = "Location:create_user.php?errors={$stringErrors}";
+        if (count($old_data)) {
+            $old_data_string = json_encode($old_data);
+            $url.="&old={$old_data_string}";
+        }
         header($url);
     } else {
     $new_user = insert($name, $email, password_hash($password, PASSWORD_DEFAULT), $room_no, $ext, "<img src='$file_name' width='100px' height='100px' style='border-radius:7px'>");

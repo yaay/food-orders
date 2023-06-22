@@ -84,6 +84,7 @@ $products->execute();
   <p class="fw-bold">Total Price: <span id="total-price">0.00</span></p>
 </div>
 						<div class="text-center mt-3">
+
 							<button class="btn btn-primary py-2 px-4">Order</button>
 						</div>
 					</form>

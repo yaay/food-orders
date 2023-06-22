@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         header('Location: order_details.php');
         exit();
+
     } catch (PDOException $e) {
         echo $e->getMessage();
     }

@@ -33,10 +33,16 @@ return $sql->fetch();
 
     if (isset($username) && empty($username)) {
       $username_error = "Username is required";
+
+  } else {
+    $old_username = $username;
   }
 
     if (isset($email) && empty($email)) {
       $emai_error = "Email is required";
+
+  } else {
+    $old_email = $email;
   }
 
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -51,7 +57,8 @@ if(!preg_match('/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])/', $password)
     // echo "<pre>";
     // var_dump($admin);
     // echo "</pre>";
-    if (($admin) && password_verify($password, $admin['password'])) {
+
+    if ($admin && password_verify($password, $admin['password'])) {
       if ($admin['isAdmin']) {
         $_SESSION["admin_username"] = $_POST['username'];
         header('Location:admin.php');
@@ -68,13 +75,15 @@ if(!preg_match('/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])/', $password)
         <form class="div-form border border-primary rounded" method="POST">
             <div class="mb-3">
                 <label for="username" class="form-label">Username:</label>
-                <input type="text" class="form-control" id="username" aria-describedby="emailHelp" name="username">
+
+                <input type="text" class="form-control" id="username" aria-describedby="emailHelp" name="username" value="<?php echo $old_username ??'' ; ?>">
                 <span class="text-danger"><?php echo $username_error ??'' ; ?></span>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address:</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    name="email">
+
+                    name="email" value="<?php echo $old_email ??'' ; ?>">
                     <span class="text-danger"><?php echo $emai_error ??'' ; ?></span>
                     <span class="text-danger"><?php echo $email_patt ??'' ; ?></span>
             </div>

@@ -22,6 +22,8 @@ $email_error = '';
 $confirmPass = '';
 $pass = '';
 $emailPattern = '';
+$old_name = '';
+$old_email = '';
 
 
 if (isset($_GET) && !empty($_GET)){
@@ -47,6 +49,17 @@ if (isset($_GET) && !empty($_GET)){
   if (in_array('emailPattern', array_flip($errors))) {
     $emailPattern = $errors["emailPattern"];
   }
+
+  if (isset($_GET['old'])) {
+    $old_data = json_decode($_GET['old'], 1);
+
+    if (isset($old_data['name'])) {
+        $old_name = $old_data['name'];
+  }
+  if (isset($old_data['email'])) {
+    $old_email = $old_data['email'];
+}
+}
 }
 ?>
 
@@ -54,12 +67,12 @@ if (isset($_GET) && !empty($_GET)){
         <form method="POST" id="userForm" action="./save_user.php" enctype="multipart/form-data" class="row g-3">
             <div class="col-md-6">
                 <label for="name" class="form-label">Name:</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" id="name" name="name" value="<?php echo $old_name; ?>">
                 <span class="text-danger"><?php echo $name; ?></span>
             </div>
             <div class="col-md-6">
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="email" name="email">
+                <input type="email" class="form-control" id="email" name="email" value="<?php echo $old_email; ?>">
                 <span class="text-danger"><?php echo $email_error; ?></span>
                 <span class="text-danger"><?php echo $emailPattern; ?></span>
             </div>

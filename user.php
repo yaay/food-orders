@@ -81,6 +81,10 @@ $products->execute();
 
 						<div id="orderd-products-injection-point"></div>
 						<div class="text-center mt-3">
+  <p class="fw-bold">Total Price: <span id="total-price">0.00</span></p>
+</div>
+						<div class="text-center mt-3">
+
 							<button class="btn btn-primary py-2 px-4">Order</button>
 						</div>
 					</form>
@@ -91,64 +95,97 @@ $products->execute();
 		</div>
 	</div>
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
 	<script>
-		const addBtns = document.querySelectorAll(".add-btn");
-		const orderProduct = document.getElementById("orderd-products-injection-point");
+  const addBtns = document.querySelectorAll(".add-btn");
+  const orderProduct = document.getElementById("orderd-products-injection-point");
+
+  
+
+  const orderProductHtml = (productId, productName, productPrice) => {
+  // Remove the "Price:" text from the productPrice variable
+  productPrice = productPrice.replace('Price: ', '');
+
+  return `
+    <div class="row" id="${productName}-${productId}">
+      <div class="col-6">
+        <p class="mt-2">${productName} <span class="mx-2 item-count text-danger">1</span></p>
+        <input type="hidden" name="orders[${productId}]" value="1">
+        <input type="hidden" class="product-price" value="${productPrice}">
+      </div>
+      <div class="col-3">
+        <p class="mt-2">Price: <span class="order-price">${productPrice}</span></p>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn increament btn-primary">+</button>
+        <button type="button" class="btn decreament btn-warning">-</button>
+      </div>
+    </div>
+  `;
+}
+
+orderProduct.addEventListener("click", (event) => {
+  if (event.target && event.target.matches(".increament")) {
+    let count = Number(event.target.parentElement.parentElement.querySelector(".item-count").innerHTML);
+    event.target.parentElement.parentElement.querySelector(".item-count").innerHTML = count + 1;
+    event.target.parentElement.parentElement.querySelector("input").value = count + 1;
+
+    // Calculate and update the order price
+    const productPrice = parseFloat(event.target.parentElement.parentElement.querySelector(".product-price").value);
+    const orderPriceElement = event.target.parentElement.parentElement.querySelector(".order-price");
+    const orderPrice = productPrice * (count + 1);
+    orderPriceElement.innerText = orderPrice.toFixed(2); // Display order price with two decimal places
+
+    // Update total price
+    updateTotalPrice();
+  }
+
+  if (event.target && event.target.matches(".decreament")) {
+    let count = Number(event.target.parentElement.parentElement.querySelector(".item-count").innerHTML);
+    event.target.parentElement.parentElement.querySelector(".item-count").innerHTML = count - 1;
+    event.target.parentElement.parentElement.querySelector("input").value = count - 1;
+
+    // Calculate and update the order price
+    const productPrice = parseFloat(event.target.parentElement.parentElement.querySelector(".product-price").value);
+    const orderPriceElement = event.target.parentElement.parentElement.querySelector(".order-price");
+    const orderPrice = productPrice * (count - 1);
+    orderPriceElement.innerText = orderPrice.toFixed(2); // Display order price with two decimal places
+
+    if (count - 1 == 0) {
+      event.target.parentElement.parentElement.remove();
+    }
+
+    // Update total price
+    updateTotalPrice();
+  }
+});
+
+function updateTotalPrice() {
+  const orderPrices = Array.from(document.querySelectorAll(".order-price"));
+  const totalPriceElement = document.getElementById("total-price");
+  let totalPrice = 0;
+
+  orderPrices.forEach((priceElement) => {
+    totalPrice += parseFloat(priceElement.innerText);
+  });
+
+  totalPriceElement.innerText = totalPrice.toFixed(2); // Display total price with two decimal places
+}
 
 
-		const orderProductHtml = (productId, productName) => {
-			return `
-						<div class="row" id="${productName}-${productId}">
-							<div class="col-6">
-								<p class="mt-2">${productName} <soan class="mx-2 item-count text-danger">1</span></p>
-								<input type="hidden" name="orders[${productId}]" value="1">
-								
-							</div>
-							<div class="col-6">
-								<button type="button" class="btn increament btn-primary">+</button>
-								<button type="button" class="btn decreament btn-warning">-</button>
-							</div>
-						</div>
-			`;
-		}
+  
 
-		orderProduct.addEventListener("click", event => {
+addBtns.forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    if (!document.getElementById(event.target.dataset.name + "-" + event.target.dataset.id)) {
+      const productPrice = event.target.parentElement.querySelector("p").innerText;
+      orderProduct.insertAdjacentHTML("beforeend", orderProductHtml(event.target.dataset.id, event.target.dataset.name, productPrice));
 
-			if (event.target && event.target.matches(".increament")) {
-
-				let count = Number(event.target.parentElement.parentElement.querySelector(".item-count").innerHTML);
-
-				event.target.parentElement.parentElement.querySelector(".item-count").innerHTML = count + 1;
-				event.target.parentElement.parentElement.querySelector("input").value = count + 1;
-			}
-
-			if (event.target && event.target.matches(".decreament")) {
-
-				let count = Number(event.target.parentElement.parentElement.querySelector(".item-count").innerHTML);
-
-				event.target.parentElement.parentElement.querySelector(".item-count").innerHTML = count - 1;
-				event.target.parentElement.parentElement.querySelector("input").value = count - 1;
-
-				if (count - 1 == 0) {
-					event.target.parentElement.parentElement.remove();
-				};
-
-			}
-
-		})
-
-
-		addBtns.forEach(btn => {
-			btn.addEventListener("click", event => {
-
-				if (!document.getElementById(event.target.dataset.name + "-" + event.target.dataset.id)) {
-					orderProduct.insertAdjacentHTML("beforeend", orderProductHtml(event.target.dataset.id, event.target.dataset.name));
-				}
-			})
-		})
-	</script>
+      // Update total price
+      updateTotalPrice();
+    }
+  });
+});
+</script>
 
 
 </body>
